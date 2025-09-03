@@ -158,3 +158,65 @@ React SPA (actualiza lista y muestra éxito)
                                   | fecha_crea  |
                                   +-------------+
 (*) únicos
+
+## 6) Plan del proyecto
+
+### 6.1 Roadmap
+
+**Semana 6 (Entregable 1 — MVP Alpha)**
+- ✅ Definición del caso (inventario de productos).  
+- ✅ Modelo de datos inicial (categorías y productos).  
+- ✅ API diseñada (endpoints CRUD, validaciones).  
+- ✅ Arquitectura y decisiones técnicas documentadas.  
+- 🚧 Vertical slice en progreso (CRUD básico).  
+
+**Semana 7–10**
+- Implementar CRUD completo en backend con FastAPI + SQLAlchemy.  
+- Añadir validaciones de negocio (unicidad, rangos, fechas).  
+- Configurar CORS y variables de entorno (`VITE_API_URL`).  
+- Frontend: listar y crear productos, mostrar loading/error.  
+- Prueba automatizada básica con `pytest` + `httpx`.  
+
+**Semana 11 (Entregable 2 — MVP completo)**  
+- Backend y frontend listos para CRUD básico.  
+- Paginación (`offset/limit`) en el GET de productos.  
+- UI con búsqueda por nombre (debounce 300ms) y/o orden asc/desc.  
+- Capturas de funcionamiento (UI + API).  
+
+**Semana 12–15**
+- Mejorar estilos de UI (TailwindCSS).  
+- Manejo de más validaciones y reglas (ej. no borrar categorías con productos).  
+- Tests adicionales (errores 404, 409, 422).  
+- Documentación ampliada (ejemplos JSON de request/response).  
+- Integración opcional con PostgreSQL.  
+
+**Semana 16 (Entrega final)**  
+- Demo funcional completa: CRUD productos + categorías.  
+- Evidencia (capturas + video corto ≤3 min).  
+- Repositorio final con estructura limpia y documentación clara.  
+- Checklist final de entregable cumplido.  
+
+---
+
+### 6.2 Tablero Kanban
+
+Se propone un tablero **To do / Doing / Done** en GitHub Projects (o Trello/Notion).  
+
+**Columnas:**
+- **To do** → tareas pendientes (ej. implementar PUT productos).  
+- **Doing** → tareas en progreso (ej. test con pytest).  
+- **Done** → completadas (ej. API básica lista).  
+
+**Ejemplo de tarjetas iniciales:**
+- *Backend*: Crear modelos SQLAlchemy para `Producto` y `Categoría`.  
+- *Backend*: Implementar endpoints CRUD `/productos` y `/categorias`.  
+- *Backend*: Agregar validaciones (unicidad, rangos).  
+- *Frontend*: Conectar API para listar productos.  
+- *Frontend*: Formulario de creación de productos.  
+- *Frontend*: Manejo de loading/error.  
+- *Pruebas*: Test de creación y listado de productos.  
+- *Docs*: Agregar capturas al README.  
+
+👉 En GitHub, el tablero se puede crear en la pestaña **Projects**, con columnas `To do / In progress / Done`.  
+
+---
