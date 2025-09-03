@@ -198,25 +198,5 @@ React SPA (actualiza lista y muestra éxito)
 
 ---
 
-### 6.2 Tablero Kanban
+## 6.2 Kanban En Imagen Subida al repositorio
 
-Se propone un tablero **To do / Doing / Done** en GitHub Projects (o Trello/Notion).  
-
-**Columnas:**
-- **To do** → tareas pendientes (ej. implementar PUT productos).  
-- **Doing** → tareas en progreso (ej. test con pytest).  
-- **Done** → completadas (ej. API básica lista).  
-
-**Ejemplo de tarjetas iniciales:**
-- *Backend*: Crear modelos SQLAlchemy para `Producto` y `Categoría`.  
-- *Backend*: Implementar endpoints CRUD `/productos` y `/categorias`.  
-- *Backend*: Agregar validaciones (unicidad, rangos).  
-- *Frontend*: Conectar API para listar productos.  
-- *Frontend*: Formulario de creación de productos.  
-- *Frontend*: Manejo de loading/error.  
-- *Pruebas*: Test de creación y listado de productos.  
-- *Docs*: Agregar capturas al README.  
-
-👉 En GitHub, el tablero se puede crear en la pestaña **Projects**, con columnas `To do / In progress / Done`.  
-
----
