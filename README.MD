@@ -200,3 +200,32 @@ React SPA (actualiza lista y muestra éxito)
 
 ## 6.2 Kanban En Imagen Subida al repositorio
 
+## 7 Estructura del proyecto
+project/
+├─ backend/
+│  ├─ app/
+│  │  ├─ api/routes/products.py
+│  │  ├─ models/product.py
+│  │  ├─ core/config.py
+│  │  └─ main.py
+│  ├─ requirements.txt
+│  └─ tests/test_products.py
+└─ frontend/
+   ├─ src/
+   │  ├─ api.js
+   │  ├─ App.jsx
+   │  └─ main.jsx
+   ├─ .env.development
+   ├─ package.json
+   └─ vite.config.js
+
+## requirements.txt
+fastapi
+uvicorn
+sqlalchemy
+pydantic
+pytest
+httpx
+
+
+
