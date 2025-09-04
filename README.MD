@@ -1,4 +1,83 @@
+## Punto 1
 
+## Must have (MVP inicial)
+
+Registrar producto
+Como administrador, quiero registrar un producto con nombre, precio y cantidad, para llevar control del inventario.
+
+## Criterios de aceptación:
+
+Si el nombre ya existe, el sistema devuelve error 409.
+
+No se permite precio < 1 ni cantidad < 1.
+
+El sistema responde con 201 y los datos del producto registrado.
+
+Listar todos los productos
+Como empleado, quiero listar todos los productos, para ver el inventario actual de la tienda.
+
+Criterios de aceptación:
+
+Devuelve lista completa de productos registrados.
+
+Si no hay productos, retorna lista vacía.
+
+El sistema responde con 200.
+
+## Should have (valores añadidos al MVP)
+
+Validaciones de precio y cantidad
+Como administrador, quiero que el sistema valide el precio (mayor o igual a 1) y cantidad (entero ≥ 1), para evitar errores en el inventario.
+
+Criterios de aceptación:
+
+Valores inválidos → 422 Unprocessable Entity.
+
+Precio y cantidad se guardan con formato correcto.
+
+UI con alertas de error
+Como usuario (admin/empleado), quiero recibir mensajes claros de error en la interfaz, para entender qué corregir.
+
+Criterios de aceptación:
+
+Mensajes visibles cuando el producto ya existe (409) o cuando hay valores inválidos (422).
+
+Alertas visibles en pantalla sin romper el flujo de uso.
+
+## Could have (no implementado todavía)
+
+Editar producto (precio o cantidad).
+
+Búsqueda por nombre o categoría.
+
+Filtros avanzados de búsqueda (rango de precios, stock).
+
+Exportar inventario a CSV.
+
+## Won’t have (fuera de alcance en esta fase)
+
+Gestión de usuarios y roles avanzados.
+Se pospone para fases futuras.
+
+## Mapa de versiones
+
+MVP (Semana 11)
+
+Historias 1 y 2 (Registrar y listar productos).
+
+Historia 3 (Validaciones críticas).
+
+Historia 4 (UI con alertas de error).
+
+Versión final (Semana 16)
+
+CRUD completo (editar, eliminar).
+
+Búsqueda y filtros avanzados.
+
+Exportar inventario a CSV.
+
+Mejoras de UI/UX y pruebas extendidas.
 
 ## 5) Arquitectura y decisiones técnicas
 
@@ -226,6 +305,7 @@ sqlalchemy
 pydantic
 pytest
 httpx
+
 
 
 
