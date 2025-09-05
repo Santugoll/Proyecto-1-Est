@@ -1,4 +1,88 @@
 ## Punto 1
+## Elevator pitch (3--5 lineas)
+
+Una pequeña tienda necesita un sistema confiable para **gestionar su
+inventario** sin errores de duplicados, precios mal ingresados ni
+cantidades negativas. Nuestra app web permite **registrar, consultar,
+editar y eliminar productos** con **validaciones claras** y alertas de
+error (p.ej., producto duplicado). Esta pensada para el
+**administrador** (gestiona el inventario) y el **empleado** (consulta
+existencias) de forma **rapida y accesible** desde el navegador.
+
+------------------------------------------------------------------------
+
+## Usuarios/segmentos y principales casos de uso
+
+-   **Administrador de la tienda**
+    -   Registrar un producto con **nombre, categoria, precio,
+        cantidad**.
+    -   Editar **precio** o **cantidad** de productos existentes.
+    -   Eliminar productos.
+-   **Empleado**
+    -   Buscar productos por **nombre** o **categoria** para verificar
+        disponibilidad y stock.
+
+**Reglas y criterios clave (resumen de historias de usuario):** -
+**Duplicados**: si el nombre ya existe -> **HTTP 409**. - **Busqueda**:
+siempre retorna **lista paginada** (puede ser vacia). - **Cantidad**:
+nunca puede ser **negativa**.
+
+------------------------------------------------------------------------
+
+## Objetivos &  No-objetivos
+
+**Objetivos** 1. CRUD de productos con validaciones de negocio
+(duplicados, rangos validos, cantidades >= 0). 2. Busqueda/filtrado por
+nombre y categoria con **paginacion**. 3. UI simple y responsiva,
+enfocada en velocidad de captura y consulta. 4. API documentada
+automaticamente (**Swagger UI** en FastAPI).
+
+**No-objetivos (explicitamente fuera de alcance por ahora)** - Gestion
+de usuarios/roles avanzada (mas alla de admin/empleado sin autenticacion
+robusta). - Integracion con codigos de barras/lectores fisicos. -
+Reportes avanzados (PDF/Excel), analitica o BI. - Integracion con
+sistemas contables/ERP o facturacion. - Multi-sucursal o control de
+movimientos/bitacora.
+
+------------------------------------------------------------------------
+
+## Metricas/KPIs de exito
+
+-   **Exactitud de datos**: % de operaciones rechazadas por validacion
+    (esperado: >= 95% de registros validos a la primera tras 1 semana de
+    uso).
+-   **Tiempo de operacion**: mediana de tiempo para **registrar** un
+    producto (objetivo: \< 15 s) y para **buscar** uno (\< 3 s).
+-   **Errores criticos**: 0 caidas en ambiente local durante sesiones de
+    \> 1 hora.
+-   **Cobertura funcional**: CRUD y busqueda con paginacion disponibles
+    y probadas (checklist de QA >= 90% cumplida).
+-   **Satisfaccion del usuario**: NPS interno de admin/empleado >= 8/10
+    tras prueba piloto.
+
+## Casos de uso (flujo minimo)
+
+1.  **Registrar** -> Validar -> Crear -> Responder `201` con el producto.
+2.  **Buscar** -> Filtros `name`, `category`, paginacion `page`, `size` ->
+    Lista (puede ser vacia) y `total`.
+3.  **Editar** -> Validar no negativo en cantidad -> Actualizar `price` o
+    `quantity`.
+4.  **Eliminar** -> Borrado por id/nombre.
+
+## Convenciones de validacion (implementacion esperada)
+
+-   **Nombre**: requerido, string no vacio, unico (case_insensitive
+    sugerido).
+-   **Categoria**: requerida, string no vacia.
+-   **Precio**: numero \> 0 con hasta 2 decimales (rechazar valores no
+    numericos).
+-   **Cantidad**: entero >= 0 (rechazar negativos o no enteros).
+-   **Codigos HTTP**:
+    -   `201` creacion exitosa, `200` lectura/edicion/eliminacion
+        exitosa.
+    -   `400/422` validacion de esquema/valores.
+    -   `409` conflicto por **nombre duplicado**.
+
 
 ## Must have (MVP inicial)
 
@@ -305,6 +389,7 @@ sqlalchemy
 pydantic
 pytest
 httpx
+
 
 
 
