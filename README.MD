@@ -233,35 +233,7 @@ Frontend:
 
 ---
 
-### DIAGRAMA SPA
-+------------------+                           +------------------------------+
-|  Usuario         |  HTML/CSS/JS (SPA)        |  React (Vite) - Frontend     |
-|  Navegador       +--------------------------> |  http://localhost:5173       |
-+------------------+                           |  - Lista/crea productos      |
-                                               |  - Estado: loading/error     |
-                                               |  - fetch/axios               |
-                                               +---------------+--------------+
-                                                               |
-                                                               | HTTP JSON (CORS)
-                                                               v
-                                               +---------------+--------------+
-                                               |  FastAPI - Backend           |
-                                               |  http://127.0.0.1:8000       |
-                                               |  Endpoints:                  |
-                                               |   - /productos (CRUD)        |
-                                               |   - /categorias (CRUD)       |
-                                               |  Validaciones Pydantic       |
-                                               |  Códigos: 200/201/204/404/   |
-                                               |           409/422            |
-                                               +---------------+--------------+
-                                                               |
-                                                               | ORM (SQLAlchemy)
-                                                               v
-                                               +---------------+--------------+
-                                               |   Base de datos              |
-                                               |   SQLite (dev) / Postgres    |
-                                               |   Tablas: Producto, Categoria|
-                                               +------------------------------+
+### DIAGRAMA SPA SUBIDO AL REPOSITORIO
 
 ## SECUENCIA TIPICA
 Usuario
@@ -389,6 +361,7 @@ sqlalchemy
 pydantic
 pytest
 httpx
+
 
 
 
