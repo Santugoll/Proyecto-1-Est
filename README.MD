@@ -236,44 +236,69 @@ Frontend:
 ### DIAGRAMA SPA SUBIDO AL REPOSITORIO
 
 ## SECUENCIA TIPICA
-```mermaid
-sequenceDiagram
-    participant Usuario
-    participant React_SPA as React SPA
-    participant FastAPI
-    participant DB as Base de datos
+## 1. Usuario  
+- Completa formulario **"Nuevo producto"** en la aplicación.  
 
-    Usuario ->> React_SPA: (1) Completa formulario "Nuevo producto"
-    React_SPA ->> FastAPI: (2) POST /productos\nBody: { id_categoria, nombre_producto, precio, cantidad, fecha_creacion }
-    FastAPI ->> FastAPI: (3) Valida Pydantic\n- nombre_producto único (409 si existe)\n- precio >= 1, cantidad >= 1 (422 si falla)
-    FastAPI ->> DB: (4) INSERT via SQLAlchemy
-    DB -->> FastAPI: (5) OK (id generado)
-    FastAPI -->> React_SPA: (6) 201 Created\nLocation: /productos/{id}
-    React_SPA ->> FastAPI: (7) GET /productos?offset=0&limit=10
-    FastAPI ->> DB: Consulta productos
-    DB -->> FastAPI: Resultado
-    FastAPI -->> React_SPA: (8) 200 OK\nHeader: X-Total-Count\nBody: [ ... productos ... ]
-    React_SPA ->> Usuario: (9) Actualiza lista y muestra éxito
+## 2. React SPA  
+- Envía `POST /productos` con el body:  
+
+```json
+{
+  id_categoria,
+  nombre_producto,
+  precio,
+  cantidad,
+  fecha_creacion
+}
+
+## 3. FastAPI  
+- Valida con **Pydantic**:  
+  - `nombre_producto` debe ser único → responde **409** si ya existe.  
+  - `precio >= 1` y `cantidad >= 1` → responde **422** si falla.  
+- Inserta en la base de datos vía **SQLAlchemy**.  
+
+## 4. Base de datos  
+- Devuelve **OK** con el `id` generado.  
+
+## 5. FastAPI  
+- Responde con **201 Created**.  
+- Incluye cabecera `Location: /productos/{id}`.  
+
+## 6. React SPA  
+- Llama a `GET /productos?offset=0&limit=10`.  
+
+## 7. FastAPI → DB → FastAPI  
+- Devuelve **200 OK** con:  
+  - Header: `X-Total-Count`.  
+  - Body: `[ ... productos ... ]`.  
+
+## 8. React SPA  
+- Actualiza la lista y muestra mensaje de éxito al usuario.  
 
 
 ## PUERTOS Y FLUJO DE RED
-[ Navegador ]
-     |
-     |  Origin: http://localhost:5173
-     v
-[ React (Vite dev server) ]  --CORS-->  [ FastAPI (uvicorn) ]  -->  [ DB ]
-                5173                         8000
+[ Navegador ] Origin: http://localhost:5173 -> [ React (Vite dev server)  5173 ]  --CORS-->  [ FastAPI (uvicorn)  8000
+]  -->  [ DB ]
+         
 
 ## Mini-ERD
-+-------------+        1        n +-------------+
-|  Categoria  |------------------>|  Producto   |
-| id (PK)     |                   | id (PK)     |
-| nombre (*)  |                   | id_categoria|
-| descripcion |                   | nombre (*)  |
-+-------------+                   | precio      |
-                                  | cantidad    |
-                                  | fecha_crea  |
-                                  +-------------+
+## Categoria  
+- **id (PK)**  
+- **nombre***  
+- descripcion  
+
+## Producto  
+- **id (PK)**  
+- id_categoria (FK → Categoria.id)  
+- **nombre***  
+- precio  
+- cantidad  
+- fecha_crea  
+
+## Relación  
+- Una **Categoria** puede tener **n Productos**.  
+- Un **Producto** pertenece a **una Categoria**.  
+
 (*) únicos
 
 ## 6) Plan del proyecto
@@ -343,6 +368,7 @@ sqlalchemy
 pydantic
 pytest
 httpx
+
 
 
 
