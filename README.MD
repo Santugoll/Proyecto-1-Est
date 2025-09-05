@@ -236,43 +236,25 @@ Frontend:
 ### DIAGRAMA SPA SUBIDO AL REPOSITORIO
 
 ## SECUENCIA TIPICA
-Usuario
-  |
-  | (1) Completa formulario "Nuevo producto"
-  v
-React SPA
-  |
-  | (2) POST /productos
-  |     Body:
-  |     { id_categoria, nombre_producto, precio, cantidad, fecha_creacion }
-  v
-FastAPI
-  |
-  | (3) Valida Pydantic:
-  |     - nombre_producto único (409 si existe)
-  |     - precio >= 1, cantidad >= 1 (422 si falla)
-  | (4) INSERT via SQLAlchemy
-  v
-Base de datos
-  |
-  | (5) OK (id generado)
-  v
-FastAPI
-  |
-  | (6) 201 Created
-  |     Location: /productos/{id}
-  v
-React SPA
-  |
-  | (7) GET /productos?offset=0&limit=10
-  v
-FastAPI -> DB -> FastAPI
-  |
-  | (8) 200 OK
-  |     Header: X-Total-Count
-  |     Body: [ ... productos ... ]
-  v
-React SPA (actualiza lista y muestra éxito)
+```mermaid
+sequenceDiagram
+    participant Usuario
+    participant React_SPA as React SPA
+    participant FastAPI
+    participant DB as Base de datos
+
+    Usuario ->> React_SPA: (1) Completa formulario "Nuevo producto"
+    React_SPA ->> FastAPI: (2) POST /productos\nBody: { id_categoria, nombre_producto, precio, cantidad, fecha_creacion }
+    FastAPI ->> FastAPI: (3) Valida Pydantic\n- nombre_producto único (409 si existe)\n- precio >= 1, cantidad >= 1 (422 si falla)
+    FastAPI ->> DB: (4) INSERT via SQLAlchemy
+    DB -->> FastAPI: (5) OK (id generado)
+    FastAPI -->> React_SPA: (6) 201 Created\nLocation: /productos/{id}
+    React_SPA ->> FastAPI: (7) GET /productos?offset=0&limit=10
+    FastAPI ->> DB: Consulta productos
+    DB -->> FastAPI: Resultado
+    FastAPI -->> React_SPA: (8) 200 OK\nHeader: X-Total-Count\nBody: [ ... productos ... ]
+    React_SPA ->> Usuario: (9) Actualiza lista y muestra éxito
+
 
 ## PUERTOS Y FLUJO DE RED
 [ Navegador ]
@@ -361,6 +343,7 @@ sqlalchemy
 pydantic
 pytest
 httpx
+
 
 
 
