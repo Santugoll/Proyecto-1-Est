@@ -371,7 +371,65 @@ httpx
 
 
 
+## Como utilizar el programa
 
+Backend (FastAPI)
+1. Entrar a la carpeta del backend
+```bash
+cd backend
+```
+2. Crear entorno virtual con uv
+```bash
+uv venv .venv
+```
+3. Activar entorno virtual
+En Windows (PowerShell):
+```powershell
+.venv\Scripts\Activate.ps1
+```
+En Linux/Mac:
+```bash
+source .venv/bin/activate
+```
+4. Instalar dependencias
+```bash
+uv pip install -r requirements.txt
+```
+5. Levantar servidor FastAPI
+```bash
+uv run uvicorn app.main:app --reload --port 8000
+```
+👉 El backend queda disponible en:
+- API: http://127.0.0.1:8000
+- Swagger Docs: http://127.0.0.1:8000/docs
+ Frontend (React + Vite)
+1. Entrar a la carpeta del frontend
+```bash
+cd frontend
+```
+2. Instalar dependencias
+```bash
+npm install
+```
+3. Configurar variables de entorno
+Crear el archivo `.env.development` dentro de `frontend/` con el contenido:
+```env
+VITE_API_URL=http://127.0.0.1:8000
+```
+4. Levantar servidor de desarrollo
+```bash
+npm run dev
+```
+👉 El frontend queda disponible en:
+- http://localhost:5173
+🧪 Flujo de prueba
+1. Levantar backend en el puerto 8000.
+2. Levantar frontend en el puerto 5173.
+3. Abrir http://localhost:5173 en el navegador.
+4. Probar:
+   - Crear un producto en el formulario.
+   - Ver el listado actualizado.
+   - Intentar crear un producto duplicado → debe aparecer error 409.
 
 
 
