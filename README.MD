@@ -342,6 +342,7 @@ Frontend:
 ## 6.2 Kanban En Imagen Subida al repositorio
 
 ## 7 Estructura del proyecto
+```json
 project/
 ├─ backend/
 │  ├─ app/
@@ -367,6 +368,7 @@ sqlalchemy
 pydantic
 pytest
 httpx
+
 
 
 
