@@ -242,7 +242,6 @@ Frontend:
 ## 2. React SPA  
 - Envía `POST /productos` con el body:  
 
-```json
 {
   id_categoria,
   nombre_producto,
@@ -368,6 +367,7 @@ sqlalchemy
 pydantic
 pytest
 httpx
+
 
 
 
